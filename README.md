@@ -24,7 +24,11 @@ Or install the bundled skill from the npm CLI:
 npx --yes lnkgo skill install --target codex
 npx --yes lnkgo skill install --target claude
 npx --yes lnkgo skill install --target cursor
+npx --yes lnkgo skill install --target project
 ```
+
+`project` writes the skill to `.codex/skills/lnkgo/SKILL.md` in the current
+working directory.
 
 ## Use The CLI
 
