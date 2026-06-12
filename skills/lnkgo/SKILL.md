@@ -162,6 +162,9 @@ Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000
 - `expires_at` — ISO datetime for link expiration
 - `max_visits` — maximum click count before link deactivates
 
+CLI note: `lnkgo create --expire 12h` is supported as sugar for `expires_at`.
+Allowed duration units are `m`, `h`, and `d` (`30m`, `12h`, `20d`).
+
 ---
 
 ### Workflow 2: Read Click Analytics
@@ -192,6 +195,9 @@ Authorization: Bearer $LNKGO_API_KEY
   launch accounts unlock **14-day analytics retention**.
 - Clicks beyond the domain-verified 50,000/month soft cap still redirect, but
   analytics detail can degrade.
+- CLI note: `lnkgo analytics <link-id> --csv` formats this aggregate analytics
+  response as local CSV. It is not a raw click export and does not create a
+  hosted report link.
 
 ---
 
@@ -370,12 +376,14 @@ lnkgo init --email your@email.com
 
 # Create link
 lnkgo create --url https://example.com
+lnkgo create --url https://example.com/temporary --expire 12h
 
 # Get QR
 lnkgo qr <link-id> --output qr.png
 
 # Read analytics
 lnkgo analytics <link-id>
+lnkgo analytics <link-id> --csv
 
 # Check domain
 lnkgo domain status links.mycompany.com

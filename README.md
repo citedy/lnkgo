@@ -41,12 +41,20 @@ export LNKGO_API_KEY="$(
 )"
 
 npx --yes lnkgo create --url https://example.com/launch --tag product-hunt
+npx --yes lnkgo create --url https://example.com/webinar --expire 12h
 npx --yes lnkgo qr <link-id> --output lnkgo-qr.png
 npx --yes lnkgo analytics <link-id>
+npx --yes lnkgo analytics <link-id> --csv
 ```
 
 Default-domain links do not need `--domain`. Use `--domain` only for an active
 custom domain owned by the account.
+
+`--expire <duration>` is CLI sugar for the API `expires_at` field. Supported
+units are minutes, hours, and days, for example `30m`, `12h`, or `20d`.
+
+`lnkgo analytics --csv` formats the current aggregate analytics JSON as local
+CSV. It is not a raw click export and does not create a hosted report link.
 
 ## Use The REST API
 
