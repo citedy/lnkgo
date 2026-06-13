@@ -41,6 +41,7 @@ export LNKGO_API_KEY="$(
 )"
 
 npx --yes lnkgo create --url https://example.com/launch --tag product-hunt
+npx --yes lnkgo create --url https://example.com/launch --slug spring-campaign
 npx --yes lnkgo create --url https://example.com/webinar --expire 12h
 npx --yes lnkgo qr <link-id> --output lnkgo-qr.png
 npx --yes lnkgo analytics <link-id>
@@ -49,6 +50,11 @@ npx --yes lnkgo analytics <link-id> --csv
 
 Default-domain links do not need `--domain`. Use `--domain` only for an active
 custom domain owned by the account.
+
+`--slug <slug>` requests a specific public short-code. The shared `lnkgo.app`
+namespace reserves system, protected, and premium slugs; verified custom
+domains allow more brand-specific slugs while still blocking system and unsafe
+terms.
 
 `--expire <duration>` is CLI sugar for the API `expires_at` field. Supported
 units are minutes, hours, and days, for example `30m`, `12h`, or `20d`.
@@ -63,7 +69,7 @@ curl -sS -X POST https://api.lnkgo.app/v1/links \
   -H "Authorization: Bearer $LNKGO_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: $(uuidgen | tr '[:upper:]' '[:lower:]')" \
-  -d '{"url":"https://example.com/launch","tags":["product-hunt"]}'
+  -d '{"url":"https://example.com/launch","slug":"spring-campaign","tags":["product-hunt"]}'
 ```
 
 ## Skill Source

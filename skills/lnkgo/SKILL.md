@@ -7,7 +7,7 @@ description: >
   at api.lnkgo.app; short links use lnkgo.app by default.
   CLI and REST API — one API for short links, QR, analytics.
   Lnkgo is the independent link-service product surface.
-version: "1.0.0"
+version: "1.0.1"
 author: Lnkgo
 tags:
   - url-shortener
@@ -135,6 +135,7 @@ Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000
 
 {
   "url": "https://example.com/my-long-url",
+  "slug": "spring-campaign",
   "tags": ["campaign", "social"],
   "title": "My Campaign"
 }
@@ -158,9 +159,15 @@ Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000
 
 - `title` — human-readable label (max 200 chars)
 - `tags` — array of strings for categorization
+- `slug` — requested public short-code (3-64 chars; letters, numbers, `_`, `-`)
 - `domain` — active verified custom domain only; omit it for default `lnkgo.app`
 - `expires_at` — ISO datetime for link expiration
 - `max_visits` — maximum click count before link deactivates
+
+Slug policy: the shared `lnkgo.app` namespace reserves system, protected, and
+premium slugs, including their `-`/`_` segments. Sandbox namespaces follow the
+same protection. Verified custom domains allow more brand-specific and generic
+premium slugs while still blocking system and unsafe terms.
 
 CLI note: `lnkgo create --expire 12h` is supported as sugar for `expires_at`.
 Allowed duration units are `m`, `h`, and `d` (`30m`, `12h`, `20d`).
@@ -376,6 +383,7 @@ lnkgo init --email your@email.com
 
 # Create link
 lnkgo create --url https://example.com
+lnkgo create --url https://example.com/launch --slug spring-campaign
 lnkgo create --url https://example.com/temporary --expire 12h
 
 # Get QR
