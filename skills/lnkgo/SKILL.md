@@ -41,6 +41,8 @@ security_notes: |
 **Auth:** `Authorization: Bearer $LNKGO_API_KEY`
 **Brand boundary:** use only the Lnkgo endpoints listed in this skill for the
 customer-facing product surface.
+**Repository boundary:** `citedy/lnkgo` is the public skill repository only. Do
+not add or deploy the `lnkgo.app` static website from this repository.
 **Forbidden customer-facing URLs:** do not use company/operator hostnames as the
 Lnkgo API base, default short-link domain, examples, fallback, or install
 target. Customer-facing Lnkgo work uses `https://api.lnkgo.app` for API calls

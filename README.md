@@ -8,6 +8,20 @@ agents and developers.
 - Default short-link domain: `lnkgo.app`
 - npm CLI: https://www.npmjs.com/package/lnkgo
 
+## Repository Boundary
+
+This public repository is the Lnkgo agent-skill source. Do not add the
+`lnkgo.app` static website, VPS deploy scripts, GitHub Actions deploy workflow,
+or private infrastructure secrets here.
+
+The live `lnkgo.app` static website is managed separately in the private
+`nttylock/lnkgo` repository. This public repo remains safe for skill
+installation through:
+
+```bash
+npx --yes skills add citedy/lnkgo
+```
+
 ## Install The Agent Skill
 
 Install through the open skills CLI:
